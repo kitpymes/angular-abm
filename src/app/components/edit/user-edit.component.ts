@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpUserService } from '../../services/http.user.service';
 import { User } from '../../models';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-user-edit',
@@ -15,22 +16,32 @@ export class UsertEditComponent implements OnInit {
   constructor(
     public activatedRoute: ActivatedRoute,
     public router: Router,
-    public apiService: HttpUserService
+    public apiService: HttpUserService,
+    private SpinnerService: NgxSpinnerService,
   ) {
     this.id = activatedRoute.snapshot.params.id;
   }
 
   ngOnInit() {
+    this.SpinnerService.show();
+
     this.apiService.getById(this.id).subscribe(
       resp => this.user = resp.data,
-      error => console.log(error)
+      error => console.log(error),
+      () => this.SpinnerService.hide()
     );
   }
 
   submit() {
+    this.SpinnerService.show();
+
     this.apiService.update(this.user).subscribe(
-      resp => this.router.navigate(['list']),
-      error => console.log(error)
+      resp => {
+        console.log('UPDATE RESPONSE: ', resp);
+        this.router.navigate(['list']);
+      },
+      error => console.log(error),
+      () => this.SpinnerService.hide()
     );
   }
 }

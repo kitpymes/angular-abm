@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpUserService } from '../../services/http.user.service';
 import { User } from '../../models/user.model';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-user-create',
@@ -13,15 +14,22 @@ export class UserCreateComponent {
 
   constructor(
     public router: Router,
-    public apiService: HttpUserService
+    public apiService: HttpUserService,
+    private SpinnerService: NgxSpinnerService,
   ) {
     this.user = new User();
    }
 
    submit() {
+    this.SpinnerService.show();
+
     this.apiService.create(this.user).subscribe(
-      resp => this.router.navigate(['list']),
-      error => console.log(error)
+      resp => {
+        console.log('CREATE RESPONSE: ', resp);
+        this.router.navigate(['list']);
+      },
+      error => console.log(error),
+      () => this.SpinnerService.hide()
     );
   }
 }
