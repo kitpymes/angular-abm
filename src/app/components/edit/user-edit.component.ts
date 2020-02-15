@@ -36,11 +36,11 @@ export class UsertEditComponent implements OnInit {
     this.SpinnerService.show();
 
     this.apiService.update(this.user).subscribe(
-      resp => {
-        console.log('UPDATE RESPONSE: ', resp);
+      res => {
+        console.log('UPDATE RESPONSE: ', res);
         this.router.navigate(['list']);
       },
-      error => console.log(error),
+      err => console.log(err),
       () => this.SpinnerService.hide()
     );
   }

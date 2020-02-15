@@ -4,7 +4,7 @@ import { Component , Input , OnChanges , Output , EventEmitter} from '@angular/c
   selector: 'app-pagination',
   templateUrl: './app-pagination.component.html'
 })
-export class PaginationComponent implements OnChanges{
+export class PaginationComponent implements OnChanges {
     @Input() totalRecords = 0;
     @Input() recordsPerPage = 0;
     @Output() onPageChange = new EventEmitter<number>();

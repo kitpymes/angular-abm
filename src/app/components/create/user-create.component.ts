@@ -24,11 +24,11 @@ export class UserCreateComponent {
     this.SpinnerService.show();
 
     this.apiService.create(this.user).subscribe(
-      resp => {
-        console.log('CREATE RESPONSE: ', resp);
+      res => {
+        console.log('CREATE RESPONSE: ', res);
         this.router.navigate(['list']);
       },
-      error => console.log(error),
+      err => console.log(err),
       () => this.SpinnerService.hide()
     );
   }

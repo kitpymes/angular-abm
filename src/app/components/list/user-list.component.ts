@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpUserService } from '../../services/http.user.service';
-import { List, User } from '../../models';
+import { List } from '../../models';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -35,11 +35,11 @@ export class UserListComponent implements OnInit {
       this.SpinnerService.show();
 
       this.apiService.delete(id).subscribe(
-        resp => {
-          console.log('DELETE RESPONSE: ', resp);
+        res => {
+          console.log('DELETE RESPONSE: ', res);
           this.getByPaged();
         },
-        error => console.log(error),
+        err => console.log(err),
         () => this.SpinnerService.hide()
       );
     }
@@ -48,7 +48,7 @@ export class UserListComponent implements OnInit {
       this.SpinnerService.show();
       setTimeout(() => {
         this.SpinnerService.hide();
-      }, 3000);
+      }, 1000);
 
       this.$users = this.apiService.getByPaged(page);
     }
