@@ -19,7 +19,7 @@ export class HttpUserService {
     @Cache({
         ttl: 2500
     })
-    getByPaged(page: number, since: number = 1): Observable<List[]> {
+    getByPaged(page: number, since: number = 1){
         return this.httpClient.get<List[]>(`${this.url}?page=${page}`);
     }
 
