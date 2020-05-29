@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpUserService } from '../../services/http.user.service';
-import { List } from '../../models';
+import { UserList } from '../../models';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-    $users: Observable<List[]>;
+    $users: Observable<UserList>;
 
     constructor(
       private apiService: HttpUserService,

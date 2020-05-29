@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpUserService } from '../../services/http.user.service';
-import { User } from '../../models';
+import { Data} from '../../models';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -11,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class UsertEditComponent implements OnInit {
   id: number;
-  user: User;
+  user: Data;
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -24,6 +24,8 @@ export class UsertEditComponent implements OnInit {
 
   ngOnInit() {
     this.SpinnerService.show();
+
+    console.log(this.id);
 
     this.apiService.getById(this.id).subscribe(
       resp => this.user = resp.data,

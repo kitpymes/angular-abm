@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpUserService } from '../../services/http.user.service';
-import { User } from '../../models/user.model';
+import { User, Data } from '../../models/user.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -10,14 +10,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./user-create.component.scss']
 })
 export class UserCreateComponent {
-  user: User;
+  user: Data;
 
   constructor(
     public router: Router,
     public apiService: HttpUserService,
     private SpinnerService: NgxSpinnerService,
   ) {
-    this.user = new User();
+    this.user = new Data();
    }
 
    submit() {

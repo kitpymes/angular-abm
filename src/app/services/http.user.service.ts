@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Cache } from './cache';
-import { User } from '../models/user.model';
-import { List } from '../models/list.model';
+import { User, Data } from '../models/user.model';
+import { UserList } from '../models/list.model';
 
 @Injectable()
 export class HttpUserService {
-    private cache$: Observable<List[]>;
+    private cache$: Observable<UserList>;
     private corsUrl = 'https://cors-anywhere.herokuapp.com/';
     private baseUrl = 'https://reqres.in/';
     private apiUrl = 'api/users';
@@ -20,18 +20,18 @@ export class HttpUserService {
         ttl: 2500
     })
     getByPaged(page: number, since: number = 1){
-        return this.httpClient.get<List[]>(`${this.url}?page=${page}`);
+        return this.httpClient.get<UserList>(`${this.url}?page=${page}`);
     }
 
     getById(userId: number) {
-        return this.httpClient.get<List>(`${this.url}/${userId}`);
+        return this.httpClient.get<User>(`${this.url}/${userId}`);
     }
 
-    create(user: User) {
+    create(user: Data) {
         return this.httpClient.post(`${this.url}`, user, { observe: 'response' });
     }
 
-    update(user: User) {
+    update(user: Data) {
         return this.httpClient.put(`${this.url}/${user.id}`, user, { observe: 'response' });
     }
 
