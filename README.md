@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
 
-https://angular-abm.netlify.app/list
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9e9c1aa1-31dd-4934-b70c-a8a4539bdf89/deploy-status)](https://app.netlify.com/sites/angular-abm/deploys)
 
 # Get started
 
