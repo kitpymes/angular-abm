@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpUserService } from '../../services/http.user.service';
 import { Data} from '../../models';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-edit',
@@ -18,14 +19,13 @@ export class UsertEditComponent implements OnInit {
     public router: Router,
     public apiService: HttpUserService,
     private SpinnerService: NgxSpinnerService,
+    private toastr: ToastrService,
   ) {
     this.id = activatedRoute.snapshot.params.id;
   }
 
   ngOnInit() {
     this.SpinnerService.show();
-
-    console.log(this.id);
 
     this.apiService.getById(this.id).subscribe(
       resp => this.user = resp.data,
@@ -39,10 +39,12 @@ export class UsertEditComponent implements OnInit {
 
     this.apiService.update(this.user).subscribe(
       res => {
-        console.log('UPDATE RESPONSE: ', res);
+        console.log(res);
+        this.toastr.success('Usuario actualizado correctamente');
+        this.toastr.info('[ Abrir la consola para ver el status devuelto por la api ]');
         this.router.navigate(['list']);
       },
-      err => console.log(err),
+      err => this.toastr.error(err, 'ERROR'),
       () => this.SpinnerService.hide()
     );
   }

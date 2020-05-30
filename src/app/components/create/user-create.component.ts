@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpUserService } from '../../services/http.user.service';
 import { User, Data } from '../../models/user.model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-create',
@@ -16,6 +17,7 @@ export class UserCreateComponent {
     public router: Router,
     public apiService: HttpUserService,
     private SpinnerService: NgxSpinnerService,
+    private toastr: ToastrService,
   ) {
     this.user = new Data();
    }
@@ -25,10 +27,12 @@ export class UserCreateComponent {
 
     this.apiService.create(this.user).subscribe(
       res => {
-        console.log('CREATE RESPONSE: ', res);
+        console.log(res);
+        this.toastr.success('Usuario creado correctamente');
+        this.toastr.info('[ Abrir la consola para ver el status devuelto por la api ]');
         this.router.navigate(['list']);
       },
-      err => console.log(err),
+      err => this.toastr.error(err, 'ERROR'),
       () => this.SpinnerService.hide()
     );
   }
